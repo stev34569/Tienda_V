@@ -1,0 +1,54 @@
+
+
+<html xmlns:th="https://thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <!-- 
+        <p th:text="Hola">  
+        <p th:text="Hola">prueba</p>
+
+        <p th:text="${cliente.nombre}"></span></p>
+        <p th:text="${cliente.apellidos}"></span></p> 
+        <p th:text="${cliente.telefonos}"></span></p>
+         <p th:text="${cliente.correo}"></span></p>
+
+> -->
+        <br>
+        <br>
+
+        <h1>Listado cliente</h1>
+
+        <div th:if="${clientes !=null and !clientes.empty}">
+        </div>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${clientes}">
+
+                    <td th:text="${item.nombre}"></td>
+                    <td th:text="${item.apellidos}"></td>
+                    <td th:text="${item.correo}"></td>
+                    <td th:text="${item.telefono}"></td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div th:if="${clientes ==null or clientes.empty}">
+            No tenemos Clientes que mostrar....
+        </div>
+    </body>
+</html>
