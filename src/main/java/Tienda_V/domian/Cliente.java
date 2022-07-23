@@ -1,44 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Tienda_V.domian;
 
-
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import lombok.Data;
-
 
 @Data
 @Entity
 @Table(name="cliente")
-public class Cliente  implements Serializable{
-    
+public class Cliente implements Serializable{
+
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCliente;
-    String nombre;
+    
+    private long idCliente; //hibernet lo transforma en id_cliente    
+    String nombre; 
     String apellidos;
-    String telefono;
     String correo;
+    String telefono;
+    
+    @JoinColumn(name="id_credito", referencedColumnName = "id_credito")
+    @ManyToOne
+    private Credito credito;
 
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellidos, String telefonos, String correo) {
+    public Cliente( String nombre, String apellidos, String correo, String telefono, String provincia) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.telefono = telefonos;
         this.correo = correo;
+        this.telefono = telefono;
     }
+
+    public Cliente(String nombre, String apellidos, String correo, String telefono, Credito credito) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.credito = credito;
+    }
+
+    
+
+    
     
     
 }
