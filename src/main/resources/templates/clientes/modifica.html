@@ -5,11 +5,10 @@
     <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
     </head>
-    <body>       
-        <div class="contenido">
-            <h2>[[#{e403.titulo}]]</h2>
-            <p>[[#{e403.texto}]]</p>
-            <a th:href="@{/}">[[#{accion.regresar}]]</a>
-        </div>        
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <section th:replace="cliente/fragmentosCliente :: editarCliente"/> 
+        <footer th:replace="layout/plantilla :: footer"/>
+
     </body>
-</html>
+</html>                     

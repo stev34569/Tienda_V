@@ -1,4 +1,3 @@
-
 package Tienda_V.controller;
 
 
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Slf4j
 public class CategoriaContoller {
 
-    @Autowired
+   @Autowired
      
     private CategoriaService categoriaService;
 

@@ -1,9 +1,8 @@
-
 package Tienda_V.controller;
+
 
 import Tienda_V.Service.ArticuloService;
 import Tienda_V.domian.Articulo;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,20 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ArticuloContoller {
 
     @Autowired
-     
     private ArticuloService articuloService;
 
     @GetMapping("/articulo/listado")
     public String inicio(Model model) {
-
-       
         var articulos = articuloService.getArticulos(false);
         model.addAttribute("articulos", articulos);
         return "/articulo/listado";
-
     }
 
-  @GetMapping("/articulo/nuevo")
+    @GetMapping("/articulo/nuevo")
     public String nuevoArticulo(Articulo articulo) {
         return "/articulo/modificar";
     }
@@ -53,4 +48,3 @@ public class ArticuloContoller {
         return "redirect:/articulo/listado";
     }
 }
-

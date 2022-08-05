@@ -1,4 +1,3 @@
-
 package Tienda_V;
 
 import org.springframework.context.annotation.Configuration;
@@ -7,50 +6,48 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-
-
-
-
-
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-    
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    //El siguiente método funciona para hacer la auttenticación del usuario
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("admin")
+                .withUser("Alonso")
                 .password("{noop}123")
                 .roles("ADMIN", "VENDEDOR", "USER")
-                .and().withUser("vendedor")
+                .and()
+                .withUser("rebeca")
                 .password("{noop}123")
                 .roles("VENDEDOR", "USER")
-                .and().withUser("user")
+                .and()
+                .withUser("pedro")
                 .password("{noop}123")
                 .roles("USER");
     }
-    // el siguiente metodo funciona para realizar la autorizacion de accesos
- @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/articulo/nuevo",         "/articulo/guardar",
-                             "/articulo/modificar/**",  "/articulo/eliminar/**",
-                             "/categoria/nuevo",        "/categoria/guardar",
-                             "/categoria/modificar/**", "/categoria/eliminar/**",
-                             "/cliente/nuevo",          "/cliente/guardar",
-                             "/cliente/modificar/**",   "/cliente/eliminar/**")
+                .antMatchers("/articulo/nuevo",        "/articulo/guardar", 
+                             "/articulo/modificar/**", "/articulo/eliminar/**",
+                             "/categoria/nuevo",       "/categoria/guardar",
+                             "/categoria/modificar/**","/categoria/eliminar/**",
+                             "/cliente/nuevo",         "/cliente/guardar",  
+                             "/cliente/modificar/**",  "/cliente/eliminar/**",
+                             "/usuario/listado",  
+                             "/usuario/nuevo",         "/usuario/guardar",  
+                             "/usuario/modificar/**",  "/usuario/eliminar/**")
                     .hasRole("ADMIN")
-                .antMatchers("/articulo/listado",         "/cliente/listado",
-                             "/categoria/listado")
-                    .hasAnyRole("ADMIN", "VENDEDOR")
+                .antMatchers("/articulo/listado", "/categoria/listado",
+                             "/cliente/listado")
+                    .hasAnyRole("ADMIN","VENDEDOR")
                 .antMatchers("/")
-                    .hasAnyRole("ADMIN", "VENDEDOR", "USER")
+                    .hasAnyRole("USER","VENDEDOR","ADMIN")
                 .and()
                     .formLogin()
                     .loginPage("/login")
                 .and()
                     .exceptionHandling().accessDeniedPage("/errores/403");
-    }
+    } 
 }
-
